@@ -12,13 +12,13 @@ import { HomePageProps } from './interfaces';
 // styles
 import './HomePage.scss';
 // @ts-ignore
-import logo from '../../../public/logo.png'
+import logo from '../../../public/images/logo.svg';
 
 const HomePage: React.FunctionComponent<HomePageProps> = (props) => {
   const renderExploreMore = () => (
     <React.Fragment>
       <NavLink to={'/explore'}>
-        <button className="mdc-button mdc-button--raised">
+        <button className="mdc-button mdc-button--raised home-button">
           <span className="mdc-button__label">Explore more</span>
         </button>
       </NavLink>
@@ -36,7 +36,7 @@ const HomePage: React.FunctionComponent<HomePageProps> = (props) => {
           <div className="hero-info">
             <h1>All Heroes and Villains United</h1>
             <SearchInput />
-            {/*{renderExploreMore()}*/}
+            {renderExploreMore()}
           </div>
         </div>
       </section>

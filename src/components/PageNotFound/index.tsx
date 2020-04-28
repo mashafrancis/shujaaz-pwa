@@ -1,6 +1,9 @@
 // react library
 import * as React from 'react';
 
+// third party apps
+import MaterialIcon from '@material/react-material-icon';
+
 // styles
 import './PageNotFound.scss';
 
@@ -21,7 +24,8 @@ const PageNotFound: React.FunctionComponent<PageNotFoundProps> = props =>  (
       <p>Sorry but the page you are looking for does not exist, have been removed. name changed or is temporarily
         unavailable</p>
         <button onClick={props.history.goBack} className="mdc-button mdc-button--raised">
-          <i className="material-icons mdc-text-field__icon">arrow_back</i>
+          <MaterialIcon
+            hasRipple icon="arrow_back" initRipple={null}/>
           <span className="mdc-button__label">Back</span>
         </button>
     </div>

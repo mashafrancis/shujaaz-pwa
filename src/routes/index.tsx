@@ -7,10 +7,12 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 // pages and components
 import HomePage from '@pages/HomePage';
 import PageNotFound from "@components/PageNotFound";
+import AppContainer from "@pages/AppContainer";
 
 const Routes = () => (
   <Switch>
     <Route exact path="/" component={HomePage} />
+    <Route exact path="/explore" component={AppContainer} />
     <Route path="/404" component={PageNotFound} />
     <Redirect to="/404" />
   </Switch>
