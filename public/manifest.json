@@ -1,12 +1,13 @@
 {
   "author": "Francis Masha",
   "name": "Superheroes",
-  "short_name": "heroes",
-  "theme_color": "#00ADB5",
-  "background_color": "#FAFAFA",
+  "short_name": "Superheroes",
+  "theme_color":"#666666",
+  "background_color": "#666666",
   "display": "standalone",
   "scope": "/",
-  "start_url": ".",
+  "start_url": "../",
+  "description": "View your favorite superheroes and villains",
   "icons": [
     {
       "src": "./logo192.png",

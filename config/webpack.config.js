@@ -10,7 +10,8 @@ const {
   hashedPlugin,
   manifestPlugin,
   // workBoxPlugin,
-  copyPlugin
+  copyPlugin,
+  imageinPlugin,
 } = require('./webpack.plugins');
 
 const isDevMode = process.env.APP_ENV !== 'production';
@@ -34,7 +35,7 @@ module.exports = {
     }
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js'],
+    extensions: ['.ts', '.tsx', '.js', '.scss', '.gif', '.png', '.jpg', '.jpeg', '.svg'],
     alias: {
       '@pages': path.resolve(__dirname, '..', 'src/pages/'),
       '@components': path.resolve(__dirname, '..', 'src/components/'),
@@ -47,9 +48,31 @@ module.exports = {
     rules: [
       {
         test: /\.(woff(2)?|ttf|eot|svg|png|jpg|jpeg|gif)$/,
-        use: {
-          loader: 'file-loader'
-        }
+        use: [
+          'file-loader',
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              mozjpeg: {
+                progressive: true,
+                quality: 65
+              },
+              optipng: {
+                enabled: !isDevMode
+              },
+              pngquant: {
+                quality: [0.65, 0.90],
+                speed: 4
+              },
+              gifsicle: {
+                interlaced: false
+              },
+              webp: {
+                quality: 75
+              }
+            }
+          }
+        ]
       },
       {
         test: /\.(scss|css)$/,
@@ -118,6 +141,7 @@ module.exports = {
     miniCssExtract,
     manifestPlugin,
     // workBoxPlugin,
-    copyPlugin
+    copyPlugin,
+    imageinPlugin,
   ]
 };

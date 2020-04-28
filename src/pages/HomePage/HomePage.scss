@@ -62,7 +62,8 @@ h1, h2, h3, h4, h5, h6 {
   justify-content: center;
   -webkit-box-align: center;
   align-items: center;
-  background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url(../../assets/images/home_cover.jpg) no-repeat center center fixed;
+  background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url(../../assets/images/home_cover.jpg) no-repeat center fixed;
+  //background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url(../../assets/images/home_cover.webp) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   //background-color: #0c0c0c;

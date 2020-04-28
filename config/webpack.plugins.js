@@ -8,6 +8,8 @@ const miniCssExtractPlugin = require('mini-css-extract-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
+const ImageminWebP = require('imagemin-webp');
+const ImageminPlugin = require('imagemin-webpack-plugin').default;
 
 const PUBLIC_PATH = process.env.PUBLIC_URL;
 
@@ -72,8 +74,14 @@ const manifestPlugin = new ManifestPlugin({
 });
 
 const copyPlugin = new CopyWebpackPlugin([
-  { from: 'public' }, // define the path of the files to be copied
+  { from: 'public' },
+  { from: 'src/assets/images/*', to: 'src/assets/images/[name].webp' }
 ]);
+
+const imageinPlugin = new ImageminPlugin({
+  // imagemin-webp docs: https://github.com/imagemin/imagemin-webp
+  plugins: [ImageminWebP({quality: 50})]
+});
 
 
 // const workBoxPlugin = new WorkboxPlugin.GenerateSW({
@@ -93,4 +101,5 @@ module.exports = {
   manifestPlugin,
   copyPlugin,
   // workBoxPlugin,
+  imageinPlugin,
 };
