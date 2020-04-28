@@ -19,8 +19,8 @@ This application will be used to view all existing superheroes and villains.
 
 ### Application Links
 
--   Frontend (Superheroes App Hosting):
-    [Superheroes progressive web app](https://superheroes.herokuapp.com/)
+-   Frontend (Superheroes Firebase App Hosting):
+    [Superheroes progressive web app]( https://superheroes-7d106.web.app)
 
 ### Development set up
 1. Install [`Node JS`](https://nodejs.org/en/).
@@ -46,7 +46,7 @@ This application will be used to view all existing superheroes and villains.
 
 ### Development server
 
-Run `yarn start:dev` for a dev server. Navigate to `http://localhost:3000/`. The app will automatically reload if you change any of the source files.
+Run `yarn start:dev` for a dev server. Navigate to `http://superheroes:3000/`. The app will automatically reload if you change any of the source files.
 
 ### Build
 
