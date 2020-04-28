@@ -10,9 +10,7 @@ import './App.scss';
 function App() {
   return (
     <ViewportProvider>
-      <>
-        {<Routes/>}
-      </>
+      <Routes/>
     </ViewportProvider>
   );
 }

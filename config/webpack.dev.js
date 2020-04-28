@@ -14,7 +14,9 @@ module.exports = merge(config, {
   },
   devServer: {
     historyApiFallback: true,
-    contentBase: path.resolve(__dirname, '../src/assets'),
+    compress:true,   //Good practice to add this to compress the files while sending.
+    contentBase: '../',
+    // contentBase: path.resolve(__dirname, '../src/assets'),
     publicPath: 'http://superheroes.com:3000/',
     hot: true,
     overlay: true,
