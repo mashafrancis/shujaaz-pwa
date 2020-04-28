@@ -1,13 +1,19 @@
 import * as React from 'react';
+
+// components
+import { ViewportProvider } from '../hooks';
+import Routes from '../routes';
+
+// styles
 import './App.scss';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>Welcome Superheroes</p>
-      </header>
-    </div>
+    <ViewportProvider>
+      <>
+        {<Routes/>}
+      </>
+    </ViewportProvider>
   );
 }
 

@@ -1,5 +1,6 @@
 const path = require('path');
-const {importer} = require('./webpack.util');
+const {materialImporter} = require('./webpack.util');
+const autoprefixer = require('autoprefixer');
 const {
   definePlugin,
   cleanWebpack,
@@ -18,8 +19,7 @@ const PUBLIC_PATH = process.env.PUBLIC_URL;
 module.exports = {
   entry: {
     main: path.join(__dirname, '..', 'src', 'index.tsx'),
-    styleGlobals: path.join(__dirname, '..', 'src/assets/scss/globals.scss'),
-    fontGlobals: path.join(__dirname, '..', 'src/assets/scss/fonts.scss')
+    styleGlobals: path.join(__dirname, '..', 'src/assets/scss/globals.scss')
   },
   output: {
     path: path.join(__dirname, '..', 'dist'),
@@ -61,7 +61,7 @@ module.exports = {
           {
             loader: 'postcss-loader',
             options: {
-              plugins: () => [require('autoprefixer')({
+              plugins: () => [autoprefixer({
                 'overrideBrowserslist': ['> 1%', 'last 2 versions']
               })],
             }
@@ -70,8 +70,12 @@ module.exports = {
             loader: 'sass-loader',
             options: {
               sourceMap: true,
-              importer,
-              includePaths: ['./node_modules'],
+              importer: materialImporter,
+              // Prefer Dart Sass
+              implementation: require('sass'),
+              sassOptions: {
+                includePaths: ['./node_modules']
+              },
             }
           },
         ]

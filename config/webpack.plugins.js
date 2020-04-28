@@ -48,7 +48,6 @@ const htmlWebpack = new htmlWebpackPlugin({
   inject: 'body',
   title: 'Superheroes',
   favicon: './public/favicon.ico',
-  materialIcons: 'https://fonts.googleapis.com/icon?family=Material+Icons',
   minify: {
     removeComments: true,
     collapseWhitespace: true,
