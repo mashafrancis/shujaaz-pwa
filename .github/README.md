@@ -8,14 +8,14 @@
 
     Application that allows users to view superheroes information
 
-  [![Superheroes](../public/img/readme.svg)](https://superheroes.herokuapp.com/)
+  [![Superheroes](../public/img/heroes.png)](https://superheroes.herokuapp.com/)
 
   #### Simple but complicated superheroes
 
 </div>
 
 ## Description
-This application will be used in a hydroponics farm control system to be used at home with limited space, in greenhouses and indoors as well.
+This application will be used to view all existing superheroes and villains.
 
 ### Application Links
 
