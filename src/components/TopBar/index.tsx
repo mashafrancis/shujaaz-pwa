@@ -12,14 +12,14 @@ import SearchInput from "@components/SearchBox";
 
 // utils
 import { useViewport } from '../../hooks';
+import {CharacterContext} from "@context/CharacterContext";
 
-// interface
-import { TopBarProps } from './interfaces';
-
-export const TopBar: React.FunctionComponent<TopBarProps> = (props) => {
-
+export default function TopBar() {
   const { width } = useViewport();
   const breakpoint = 539;
+
+  const characterContext = React.useContext(CharacterContext);
+  const { characterId, setCharacterId } = characterContext;
 
   return (
     <TopAppBar className="dashboard-mobile-nav">
@@ -27,7 +27,7 @@ export const TopBar: React.FunctionComponent<TopBarProps> = (props) => {
         <TopAppBarSection align="start">
           {(width > breakpoint) &&
           <TopAppBarIcon navIcon tabIndex={0}>
-            <ArrowBackRoundedIcon />
+            <ArrowBackRoundedIcon onClick={() => setCharacterId(characterId - 1)}/>
           </TopAppBarIcon>}
 
           <div className="topbar-divider topbar-lockup-divider"/>
@@ -35,7 +35,7 @@ export const TopBar: React.FunctionComponent<TopBarProps> = (props) => {
           <div className="topbar-divider topbar-lockup-divider"/>
           {(width > breakpoint) &&
           <TopAppBarIcon navIcon tabIndex={0}>
-            <ArrowForwardRoundedIcon />
+            <ArrowForwardRoundedIcon onClick={() => setCharacterId(characterId + 1)}/>
           </TopAppBarIcon>}
         </TopAppBarSection>
 

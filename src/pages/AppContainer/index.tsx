@@ -1,13 +1,12 @@
 import * as React from 'react';
 
 // components
-import { TopBar } from "@components/TopBar";
+import TopBar from "@components/TopBar";
 import { TopAppBarFixedAdjust } from "@material/react-top-app-bar";
 import PageBottomNavigation from "@components/BottomNavigation";
 
 // utils
 import { useViewport } from "../../hooks";
-import { MenuContext } from '@utils/context';
 
 // interfaces
 import {
@@ -17,10 +16,14 @@ import {
 
 // styles
 import './AppContainer.scss';
+import SuperHeroPage from "@pages/SuperHeroPage";
 
 const AppContainer: React.FunctionComponent<AppContainerProps> = (props) => {
   const [state, setState] = React.useState<AppContainerState>({
     selectedIndex: 0,
+    character: {},
+    error: null,
+    isLoading: true,
   });
 
   const { width } = useViewport();
@@ -34,20 +37,13 @@ const AppContainer: React.FunctionComponent<AppContainerProps> = (props) => {
   const { selectedIndex } = state;
 
   return (
-    <MenuContext.Provider
-      value={{
-        selectedIndex,
-        setSelectedIndex,
-      }}
-    >
-      <div className="container">
-        <TopBar />
-        <TopAppBarFixedAdjust>
-          {props.component}
-        </TopAppBarFixedAdjust>
-        { width < breakpoint && <PageBottomNavigation/> }
-      </div>
-    </MenuContext.Provider>
+    <div className="container">
+      <TopBar />
+      <TopAppBarFixedAdjust>
+        <SuperHeroPage />
+      </TopAppBarFixedAdjust>
+      { width < breakpoint && <PageBottomNavigation/> }
+    </div>
   )
 }
 
