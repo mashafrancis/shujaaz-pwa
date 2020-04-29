@@ -40,7 +40,7 @@ module.exports = {
       '@pages': path.resolve(__dirname, '..', 'src/pages/'),
       '@components': path.resolve(__dirname, '..', 'src/components/'),
       '@placeholders': path.resolve(__dirname, '..', 'src/placeholders/'),
-      '@utils': path.resolve(__dirname, '..', 'src/utils'),
+      '@context': path.resolve(__dirname, '..', 'src/context'),
     },
     modules: [path.resolve(__dirname, 'src'), 'node_modules']
   },

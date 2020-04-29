@@ -1,5 +1,6 @@
 * {
   font-family: 'Product Sans', sans-serif !important;
+  -webkit-font-smoothing: antialiased;
 }
 
 body, html {
@@ -25,4 +26,8 @@ body, html {
   height: auto;
   border: 0;
   border-radius: 4px;
+}
+
+.mdc-layout-grid {
+  max-width: 1140px !important;
 }

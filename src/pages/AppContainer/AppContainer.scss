@@ -13,7 +13,19 @@ body {
   flex-direction: row;
   height: 100vh;
   overflow: hidden;
-  background-color: #d6dae04d;;
+  background-color: #d6dae04d;
+
+  .mdc-top-app-bar--fixed-adjust {
+    padding: 64px 10px 20px;
+    width: -webkit-fill-available;
+    margin-bottom: 20px;
+    overflow-y: auto;
+  }
+
+  .top-app-bar-fix-adjust {
+    display: flex;
+    width: 100%;
+  }
 
   @media (min-width: 768px) {
     .dashboard .dashboard-nav {

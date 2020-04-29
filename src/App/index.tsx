@@ -1,8 +1,8 @@
 import * as React from 'react';
 
 // components
-import { ViewportProvider } from '../hooks';
 import Routes from '../routes';
+import { ViewportProvider } from "@context/ViewportContext";
 
 // styles
 import './App.scss';

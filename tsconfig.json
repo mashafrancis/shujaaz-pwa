@@ -31,7 +31,7 @@
       "@components/*": ["src/components/*"],
       "@placeholders/*": ["src/placeholders/*"],
       "@pages/*": ["src/pages/*"],
-      "@utils/*": ["src/utils/*"]
+      "@context/*": ["src/context/*"]
     }
   },
   "include": [
