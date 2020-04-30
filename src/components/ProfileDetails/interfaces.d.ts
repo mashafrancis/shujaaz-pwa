@@ -1,4 +1,4 @@
 export interface ProfileDetailsProps {
-  detail: string;
+  detail?: string;
   content: any;
 }

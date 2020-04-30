@@ -4,6 +4,10 @@ import * as React from 'react';
 import TopBar from "@components/TopBar";
 import { TopAppBarFixedAdjust } from "@material/react-top-app-bar";
 import PageBottomNavigation from "@components/BottomNavigation";
+import {ComponentContext} from "@context/ComponentContext";
+import {ComponentRoutes} from "@components/ComponentRoutes";
+import HomePage from "@pages/HomePage";
+import Footer from "@components/Footer";
 
 // utils
 import { useViewport } from "../../hooks";
@@ -16,9 +20,9 @@ import {
 
 // styles
 import './AppContainer.scss';
-import SuperHeroPage from "@pages/SuperHeroPage";
 
 const AppContainer: React.FunctionComponent<AppContainerProps> = (props) => {
+  const componentContext = React.useContext(ComponentContext);
   const [state, setState] = React.useState<AppContainerState>({
     selectedIndex: 0,
     character: {},
@@ -29,20 +33,21 @@ const AppContainer: React.FunctionComponent<AppContainerProps> = (props) => {
   const { width } = useViewport();
   const breakpoint = 539;
 
-  const setSelectedIndex = (selectedIndex: number) => {
-    setState({ ...state, selectedIndex });
-    window.localStorage.setItem('selectedIndex', JSON.stringify(selectedIndex));
-  };
-
-  const { selectedIndex } = state;
+  const { selectedIndex } = componentContext;
 
   return (
     <div className="container">
-      <TopBar />
-      <TopAppBarFixedAdjust>
-        <SuperHeroPage />
-      </TopAppBarFixedAdjust>
-      { width < breakpoint && <PageBottomNavigation/> }
+      {
+        selectedIndex === 0 ? React.createElement(HomePage) :
+          <React.Fragment>
+            <TopBar/>
+              <TopAppBarFixedAdjust>
+                {React.createElement(ComponentRoutes[selectedIndex].component)}
+              </TopAppBarFixedAdjust>
+            {width < breakpoint && <PageBottomNavigation/>}
+            {width > breakpoint && <Footer />}
+          </React.Fragment>
+      }
     </div>
   )
 }

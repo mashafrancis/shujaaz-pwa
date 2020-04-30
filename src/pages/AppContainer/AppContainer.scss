@@ -89,6 +89,13 @@ body {
     }
   }
 
+  .MuiTypography-h6 {
+    font-size: 0.8rem !important;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: 0.0075em;
+  }
+
   .mdc-drawer .mdc-list-item {
     margin: 8px 8px 8px 0;
   }

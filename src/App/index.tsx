@@ -6,11 +6,14 @@ import { ViewportProvider } from "@context/ViewportContext";
 
 // styles
 import './App.scss';
+import {ComponentProvider} from "@context/ComponentContext";
 
 function App() {
   return (
     <ViewportProvider>
-      <Routes/>
+      <ComponentProvider>
+        <Routes/>
+      </ComponentProvider>
     </ViewportProvider>
   );
 }
