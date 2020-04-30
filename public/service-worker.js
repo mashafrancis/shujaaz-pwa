@@ -10,7 +10,10 @@ const FILES_TO_CACHE = [
   './offline.html',
   'https://fonts.cdnfonts.com/css/google-sans',
   'https://fonts.googleapis.com/icon?family=Material+Icons',
-  'https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.js'
+  'https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.js',
+  'https://res.cloudinary.com/almondgreen/image/upload/v1588222696/Shujazz/Placeholder_couple_superhero_fv4w1x.png',
+  'https://res.cloudinary.com/almondgreen/image/upload/v1588222699/Shujazz/14358_txwt9w.jpg'
+
 ];
 
 self.addEventListener('install', (evt) => {

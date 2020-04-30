@@ -13,15 +13,16 @@ import { HomePageProps } from './interfaces';
 import './HomePage.scss';
 // @ts-ignore
 import logo from '../../../public/images/logo.svg';
+import {ComponentContext} from "@context/ComponentContext";
 
 const HomePage: React.FunctionComponent<HomePageProps> = (props) => {
+  const componentContext = React.useContext(ComponentContext);
+  const { setSelectedIndex } = componentContext;
   const renderExploreMore = () => (
     <React.Fragment>
-      <NavLink to={'/explore'}>
-        <button className="mdc-button mdc-button--raised home-button">
-          <span className="mdc-button__label">Explore more</span>
-        </button>
-      </NavLink>
+      <button className="mdc-button mdc-button--raised home-button" onClick={() => setSelectedIndex(1)}>
+        <span className="mdc-button__label">Explore more</span>
+      </button>
     </React.Fragment>
   );
 
@@ -29,7 +30,6 @@ const HomePage: React.FunctionComponent<HomePageProps> = (props) => {
     <div className="cover">
       <section className="logo">
           <img src={logo} alt="logo" />
-          {/*<h2>Superheroes</h2>*/}
       </section>
       <section id="hero">
         <div className="hero-container">

@@ -13,6 +13,7 @@ import {MenuBottomProps} from "@components/BottomNavigation/interfaces";
 import ArrowBackRoundedIcon from "@material-ui/icons/ArrowBackRounded";
 import HomeRoundedIcon from "@material-ui/icons/HomeRounded";
 import ArrowForwardRoundedIcon from "@material-ui/icons/ArrowForwardRounded";
+import {ComponentContext} from "@context/ComponentContext";
 
 const useStyles = makeStyles({
   root: {
@@ -20,38 +21,50 @@ const useStyles = makeStyles({
     paddingLeft: '10px',
     paddingRight: '10px',
   },
+  hideButton: {
+    display: 'none'
+  }
 });
 
 export const PageBottomNavigation: React.FunctionComponent = () => {
   // @ts-ignore
   const classes = useStyles();
-
-  let history = useHistory();
-  const handleBackHome = () => history.push('/');
+  const componentContext = React.useContext(ComponentContext);
+  const { setSelectedIndex, selectedIndex } = componentContext;
 
   const characterContext = React.useContext(CharacterContext);
   const { characterId, setCharacterId } = characterContext;
 
   const BottomNavigationMenus: MenuBottomProps[] = [
     {
-      icon: <ArrowBackRoundedIcon />,
+      icon: <ArrowBackRoundedIcon className={(characterId === 1 && classes.hideButton)} />,
       label: 'Back',
       value: 'back',
-      click: () => setCharacterId(characterId - 1),
+      click: () => setCharacterId(parseInt(characterId, 10) - 1),
     },
     {
       icon: <HomeRoundedIcon />,
       label: 'Home',
       value: 'home',
-      click: handleBackHome,
+      click: () => setSelectedIndex(0),
     },
     {
       icon: <ArrowForwardRoundedIcon />,
       label: 'Next',
       value: 'next',
-      click: () => setCharacterId(characterId + 1),
+      click: () => setCharacterId(parseInt(characterId, 10) + 1),
     }
   ];
+
+  const CharactersNavigationMenus: MenuBottomProps[] = [
+    {
+      icon: <HomeRoundedIcon />,
+      label: 'Home',
+      value: 'home',
+      click: () => setSelectedIndex(0),
+    }
+  ];
+
 
   return (
     <BottomNavigation
@@ -60,15 +73,24 @@ export const PageBottomNavigation: React.FunctionComponent = () => {
       showLabels
     >
       {
-        BottomNavigationMenus.map((menu, index) => (
-          <BottomNavigationAction
-            key={index}
-            onClick={menu.click}
-            label={menu.label}
-            icon={menu.icon}
-          />
+        (selectedIndex === 2) ?
+          CharactersNavigationMenus.map((menu, index) => (
+              <BottomNavigationAction
+                key={index}
+                onClick={menu.click}
+                label={menu.label}
+                icon={menu.icon}
+              />
+            )
+          ) : BottomNavigationMenus.map((menu, index) => (
+            <BottomNavigationAction
+              key={index}
+              onClick={menu.click}
+              label={menu.label}
+              icon={menu.icon}
+            />
           )
-        )
+          )
       }
     </BottomNavigation>
   );

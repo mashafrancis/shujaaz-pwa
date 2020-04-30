@@ -1,4 +1,4 @@
-export const hero =
+export const heroCharacters = [
   {
     "response": "success",
     "id": "70",
@@ -49,3 +49,4 @@ export const hero =
       "url": "https://www.superherodb.com/pictures2/portraits/10/100/639.jpg"
     }
   }
+]

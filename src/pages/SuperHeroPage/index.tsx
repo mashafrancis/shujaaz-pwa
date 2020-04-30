@@ -14,21 +14,13 @@ import Loader from "@components/Loader";
 // styles
 import './SuperHeroPage.scss';
 
-// interfaces
-import {
-  SuperHeroPageProps,
-  SuperHeroPageState
-} from './interfaces';
 import { CharacterContext } from "@context/CharacterContext";
 
+const placeholder = 'https://res.cloudinary.com/almondgreen/image/upload/v1588222696/Shujazz/Placeholder_couple_superhero_fv4w1x.png'
 
-export const SuperHeroPage: React.FunctionComponent<SuperHeroPageProps> = (props) => {
+
+export const SuperHeroPage: React.FunctionComponent = () => {
   const characterDetails = React.useContext(CharacterContext);
-  const [state, setState] = React.useState<SuperHeroPageState>({
-    character: {},
-    error: null,
-  });
-
   const { character, loading } = characterDetails;
 
   return (
@@ -39,7 +31,7 @@ export const SuperHeroPage: React.FunctionComponent<SuperHeroPageProps> = (props
           <div className="basic-info">
             <div className="basic-info__row profile-info">
               <div className="character-photo">
-                <img className="char-image" src={character.image.url} alt="image" />
+                <img className="char-image" src={character.image.url || placeholder} alt="image" />
               </div>
             </div>
             <div className="basic-info__row profile-info">
