@@ -20,6 +20,8 @@ import {
 
 // styles
 import './AppContainer.scss';
+import ErrorBoundary from "@components/ErrorBoundary";
+import {Grid, Row} from "@material/react-layout-grid";
 
 const AppContainer: React.FunctionComponent<AppContainerProps> = (props) => {
   const componentContext = React.useContext(ComponentContext);
@@ -42,7 +44,9 @@ const AppContainer: React.FunctionComponent<AppContainerProps> = (props) => {
           <React.Fragment>
             <TopBar/>
               <TopAppBarFixedAdjust>
-                {React.createElement(ComponentRoutes[selectedIndex].component)}
+                <ErrorBoundary>
+                  {React.createElement(ComponentRoutes[selectedIndex].component)}
+                </ErrorBoundary>
               </TopAppBarFixedAdjust>
             {width < breakpoint && <PageBottomNavigation/>}
             {width > breakpoint && <Footer />}

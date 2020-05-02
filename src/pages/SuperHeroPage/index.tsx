@@ -9,12 +9,12 @@ import {
 
 // components
 import ProfilePanel from "@components/ProfilePanel";
-import Loader from "@components/Loader";
 
 // styles
 import './SuperHeroPage.scss';
 
 import { CharacterContext } from "@context/CharacterContext";
+import SuperheroPageLoader from "@placeholders/SuperheroPageSkeletonLoader";
 
 const placeholder = 'https://res.cloudinary.com/almondgreen/image/upload/v1588222696/Shujazz/Placeholder_couple_superhero_fv4w1x.png'
 
@@ -24,7 +24,7 @@ export const SuperHeroPage: React.FunctionComponent = () => {
   const { character, loading } = characterDetails;
 
   return (
-    loading ? <Loader /> :
+    loading ? <SuperheroPageLoader /> :
     <Grid>
       <Row>
         <Cell columns={6} desktopColumns={6} tabletColumns={8} phoneColumns={4}>

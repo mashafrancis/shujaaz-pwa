@@ -7,7 +7,7 @@ const htmlWebpackPlugin = require('html-webpack-plugin');
 const miniCssExtractPlugin = require('mini-css-extract-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const WorkboxPlugin = require('workbox-webpack-plugin');
+const { InjectManifest } = require('workbox-webpack-plugin');
 const ImageminWebP = require('imagemin-webp');
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
 
@@ -83,12 +83,20 @@ const imageinPlugin = new ImageminPlugin({
   plugins: [ImageminWebP({quality: 50})]
 });
 
-
-// const workBoxPlugin = new WorkboxPlugin.GenerateSW({
-//   swDest: 'sWorker.js',
-//   include: [/\.html$/, /\.js$/, /\.css$/],
-//   exclude: ['/node_modules']
-// });
+const workBoxPlugin = new InjectManifest({
+  swSrc: './public/service-worker.js',
+  // include: [
+  //   /\.html$/,
+  //   /\.js$/,
+  //   /\.css$/,
+  //   /\.woff2$/,
+  //   /\.jpg$/,
+  //   /\.png$/
+  // ],
+  // exclude: ['/node_modules'],
+  exclude: [ /\.map$/, /^manifest.*\.js(?:on)?$/ ],
+  maximumFileSizeToCacheInBytes: 5000000,
+});
 
 module.exports = {
   cleanWebpack,
@@ -100,6 +108,6 @@ module.exports = {
   hashedPlugin,
   manifestPlugin,
   copyPlugin,
-  // workBoxPlugin,
+  workBoxPlugin,
   imageinPlugin,
 };

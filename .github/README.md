@@ -8,7 +8,7 @@
 
     Application that allows users to view superheroes information
 
-  [![Superheroes](../public/img/heroes.png)](https://superheroes.herokuapp.com/)
+  [![Superheroes](../public/img/heroes.png)](https://superheroes-7d106.web.app/)
 
   #### Simple but complicated superheroes
 

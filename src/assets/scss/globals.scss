@@ -42,3 +42,46 @@ body, html {
 .mdc-top-app-bar__section {
   padding: 8px 44px;
 }
+
+@media (max-width: 599px) {
+  .mdc-top-app-bar__section {
+    padding: 4px;
+  }
+}
+
+.mdc-top-app-bar__section--align-start {
+  justify-content: flex-start;
+  order: -1;
+}
+
+.mdc-top-app-bar__row {
+  display: flex;
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  height: 64px;
+}
+
+.mdc-top-app-bar__section {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  z-index: 1;
+  flex: 1 1 auto;
+  padding: 8px 12px;
+}
+
+@media (min-width: 840px) {
+  .mdc-layout-grid {
+    box-sizing: border-box;
+    margin: 0px auto;
+  }
+}
+
+@media (min-width: 840px) {
+  .mdc-layout-grid__inner {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0px, 1fr));
+    margin: 0px;
+  }
+}

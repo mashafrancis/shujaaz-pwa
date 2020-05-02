@@ -25,7 +25,7 @@ const PageNotFound: React.FunctionComponent<PageNotFoundProps> = props =>  (
       <p>Sorry but the page you are looking for does not exist, have been removed. name changed or is temporarily
         unavailable</p>
         <button onClick={props.history.goBack} className="mdc-button mdc-button--raised">
-          <ArrowBackRoundedIcon />,
+          <ArrowBackRoundedIcon />
           <span className="mdc-button__label">Back</span>
         </button>
     </div>
