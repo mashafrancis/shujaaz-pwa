@@ -38,7 +38,7 @@ export const PageBottomNavigation: React.FunctionComponent = () => {
   const BottomNavigationMenus: MenuBottomProps[] = [
     {
       icon: <ArrowBackRoundedIcon className={(characterId === 1 && classes.hideButton)} />,
-      label: 'Back',
+      label: (characterId > 1 && 'Back'),
       value: 'back',
       click: () => setCharacterId(parseInt(characterId, 10) - 1),
     },

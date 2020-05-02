@@ -9,7 +9,7 @@ const {
   miniCssExtractPlugin,
   hashedPlugin,
   manifestPlugin,
-  // workBoxPlugin,
+  workBoxPlugin,
   copyPlugin,
   imageinPlugin,
 } = require('./webpack.plugins');
@@ -140,8 +140,8 @@ module.exports = {
     cleanWebpack,
     miniCssExtract,
     manifestPlugin,
-    // workBoxPlugin,
     copyPlugin,
     imageinPlugin,
+    // workBoxPlugin,
   ]
 };

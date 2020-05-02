@@ -19,9 +19,30 @@ const CharacterProvider = ({ children }) => {
     proxyTargetUrl = `https://superheroapi.com/api/${apiKey}/${characterId}`,
     proxySearchUrl = `https://superheroapi.com/api/${apiKey}/search/${search}`
 
+  const fetchCharacterFromCache = () => {
+    if (!('caches' in window)) return null;
+    return caches.match(proxyUrl + proxyTargetUrl)
+      .then((response) => {
+        if (response) {
+          return response.json()
+        }
+        return null;
+      })
+      .catch((err) => {
+        console.error('Error getting data from cache', err);
+        return null;
+      });
+  }
+
   const fetchCharacter = async () => {
     try {
       setLoading(true);
+      // if (('caches' in window)) {
+      //   fetchCharacterFromCache()
+      //     .then((character) => setCharacter(character))
+      //     .then(() => setLoading(false));
+      // }
+
       let req = new Request(proxyUrl + proxyTargetUrl, {
         method: 'GET',
         headers: {

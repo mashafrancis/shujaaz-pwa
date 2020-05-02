@@ -1,8 +1,5 @@
 import * as React from 'react';
 
-// third party apps
-import { NavLink } from 'react-router-dom';
-
 // components
 import SearchInput from "@components/SearchBox";
 
@@ -13,7 +10,7 @@ import { HomePageProps } from './interfaces';
 import './HomePage.scss';
 // @ts-ignore
 import logo from '../../../public/images/logo.svg';
-import {ComponentContext} from "@context/ComponentContext";
+import { ComponentContext } from "@context/ComponentContext";
 
 const HomePage: React.FunctionComponent<HomePageProps> = (props) => {
   const componentContext = React.useContext(ComponentContext);
@@ -34,7 +31,7 @@ const HomePage: React.FunctionComponent<HomePageProps> = (props) => {
       <section id="hero">
         <div className="hero-container">
           <div className="hero-info">
-            <h1>All Heroes and Villains United</h1>
+            <h1>Heroes and Villains</h1>
             <SearchInput />
             {renderExploreMore()}
           </div>

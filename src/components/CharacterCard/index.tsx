@@ -63,8 +63,8 @@ export const CharacterCard: React.FunctionComponent<CharacterCardProps> = (props
       tabletColumns={4}
       phoneColumns={2}
     >
-      <Card className={classes.root}>
-        <div className={classes.details} onClick={fetchCharacter}>
+      <Card className={classes.root} onClick={fetchCharacter}>
+        <div className={classes.details}>
           <CardContent className={classes.content}>
             <Typography component="p" variant="h6">
               {props.name}

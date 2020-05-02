@@ -1,23 +1,30 @@
-'use strict';
+// 'use strict';
+
+// importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js');
+
+// precacheAndRoute(self.__WB_MANIFEST);
 
 // Update cache names any time any of the cached files change.
 const CACHE_NAME = 'static-cache-v1';
+const DATA_CACHE_NAME = 'data-cache-v1';
 
 // Add list of files to cache here.
 const FILES_TO_CACHE = [
   '.',
   'index.html',
   './offline.html',
+  './images/offline.png',
   'https://fonts.cdnfonts.com/css/google-sans',
   'https://fonts.googleapis.com/icon?family=Material+Icons',
-  'https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.js',
   'https://res.cloudinary.com/almondgreen/image/upload/v1588222696/Shujazz/Placeholder_couple_superhero_fv4w1x.png',
-  'https://res.cloudinary.com/almondgreen/image/upload/v1588222699/Shujazz/14358_txwt9w.jpg'
-
+  'https://res.cloudinary.com/almondgreen/image/upload/v1588222699/Shujazz/14358_txwt9w.jpg',
+  'https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.css',
+  'https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.js',
+  'https://res.cloudinary.com/mashafrancis/image/upload/v1558595770/kari4me/emoji.png'
 ];
 
-self.addEventListener('install', (evt) => {
-  evt.waitUntil(
+self.addEventListener('install', (event) => {
+  event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       console.log('[ServiceWorker] Pre-caching offline page');
       return cache.addAll(FILES_TO_CACHE);
@@ -25,11 +32,11 @@ self.addEventListener('install', (evt) => {
   );
 });
 
-self.addEventListener('activate', (evt) => {
-  evt.waitUntil(
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
     caches.keys().then((keyList) => {
       return Promise.all(keyList.map((key) => {
-        if (key !== CACHE_NAME) {
+        if (key !== CACHE_NAME && key !== DATA_CACHE_NAME) {
           console.log('[ServiceWorker] Removing old cache', key);
           return caches.delete(key);
         }
@@ -38,13 +45,39 @@ self.addEventListener('activate', (evt) => {
   );
 });
 
-self.addEventListener('fetch', (evt) => {
-  if (evt.request.mode !== 'navigate') {
+self.addEventListener('fetch', (event) => {
+  if (event.request.mode !== 'navigate') {
     // Not a page navigation, bail.
     return;
   }
-  evt.respondWith(
-    fetch(evt.request)
+  if (event.request.url.includes('/api/')) {
+    console.log('[Service Worker] Fetch (data)', event.request.url);
+    event.respondWith(
+      caches.open(DATA_CACHE_NAME).then((cache) => {
+        return fetch(event.request)
+          .then((response) => {
+            // If the response was good, clone it and store it in the cache.
+            if (response.status === 200) {
+              cache.put(event.request.url, response.clone());
+            }
+            return response;
+          }).catch((err) => {
+            // Network request failed, try to get it from the cache.
+            return cache.match(event.request);
+          });
+      }));
+    return;
+  }
+  event.respondWith(
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.match(event.request)
+        .then((response) => {
+          return response || fetch(event.request);
+        });
+    })
+  );
+  event.respondWith(
+    fetch(event.request)
       .catch(() => {
         return caches.open(CACHE_NAME)
           .then((cache) => {
@@ -53,85 +86,3 @@ self.addEventListener('fetch', (evt) => {
       })
   );
 });
-
-// (function() {
-//   'use strict';
-//
-//   const FILES_TO_CACHE = [
-//     '.',
-//     'index.html',
-//     '/offline.html',
-//     'https://fonts.cdnfonts.com/css/google-sans',
-//     'https://fonts.googleapis.com/icon?family=Material+Icons',
-//     'https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.js'
-//   ];
-//
-//   const staticCaches = 'my-appshell-cache';  //Will use Cache, falling back to Network.
-//   const apiCaches = "my-api-cache"; //Will use Cache then Network.
-//
-//   self.addEventListener('install', function(event) {
-//     console.info('##Service Worker## Attempting to install service worker and cache static assets');
-//     event.waitUntil(
-//       caches.open(staticCaches)
-//         .then(function(cache) {
-//           return cache.addAll(FILES_TO_CACHE);
-//         })
-//       // .then(function(){
-//       //    self.skipWaiting();
-//       // })
-//     );
-//   });
-//
-//   self.addEventListener('activate', function(event) {
-//     console.log('##Service Worker## Activating new service worker...');
-//     const cacheWhitelist = [staticCaches, apiCaches];
-//     event.waitUntil(
-//       caches.keys().then(function(cacheNames) {
-//         return Promise.all(
-//           cacheNames.map(function(cacheName) {
-//             if (cacheWhitelist.indexOf(cacheName) === -1) {
-//               return caches.delete(cacheName);
-//             }
-//           })
-//         );
-//       })
-//       // .then(function(val){
-//       //    return self.clients.claim()
-//       // })
-//     );
-//   });
-//
-//   /* if found in CACHE then return from CACHE else from NETWORK */
-//   self.addEventListener('fetch', function(event) {
-//     // console.log('Fetch event for >>>> ', event.request.url);
-//     event.respondWith(
-//       caches.match(event.request)
-//         .then(function(response) {
-//           if (response) {
-//             console.log('Found ', event.request.url, ' in cache');
-//             return response;
-//           }
-//
-//           console.warn('##Service Worker##  Not in Cache... Making Network request for ', event.request.url);
-//
-//           return fetch(event.request)
-//             .then(function(response) {
-//               if (response.status === 404) {
-//                 return caches.match('/offline.html');
-//               }
-//               //This code prevents caching Github api responses.
-//               if (event.request.url.indexOf('github') > -1 ) {
-//                 console.info('##Service Worker##  GitHub API requests will not be cached.');
-//                 return response;
-//               }
-//
-//               return response
-//             });
-//         })
-//         .catch(function(error) {
-//           console.error('##Service Worker##  Failed to fetch', event.request.url);
-//           return caches.match('/offline.html');
-//         })
-//     );
-//   });
-// })();
