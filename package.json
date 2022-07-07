@@ -48,7 +48,7 @@
     "html2canvas": "^1.0.0-rc.5",
     "https-proxy-agent": "^5.0.0",
     "material-components-web": "^6.0.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "node-fetch": "^2.6.0",
     "postcss-loader": "^3.0.0",
     "prop-types": "^15.7.2",
